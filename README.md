@@ -196,13 +196,9 @@ This repository contains a FastAPI application deployed on Azure Kubernetes Serv
 ## Backup
 
 - Veeam Kasten K10 is configured for backups. Check the `/k8s/kasten-backup.yml` file for details on backup profiles and policies.
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+  
 ```
 
-### Explanation:
 - **Project Title and Overview**: Briefly describes the project and its purpose.
 - **Table of Contents**: Provides a navigational structure for the README.
 - **Prerequisites**: Lists the necessary tools and configurations required to run the project.
