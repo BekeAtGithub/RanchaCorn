@@ -21,29 +21,6 @@ resource "azurerm_kubernetes_cluster" "main" {
     network_policy = "azure"
   }
 
-  addon_profile {
-    oms_agent {
-      enabled                    = true
-      log_analytics_workspace_id = var.log_analytics_workspace_id
-    }
-  }
-
   tags = var.tags
 }
 
-# Output the AKS cluster details
-output "aks_cluster_name" {
-  description = "The name of the AKS cluster"
-  value       = azurerm_kubernetes_cluster.main.name
-}
-
-output "aks_cluster_id" {
-  description = "The ID of the AKS cluster"
-  value       = azurerm_kubernetes_cluster.main.id
-}
-
-output "kube_config" {
-  description = "The kubeconfig for the AKS cluster"
-  value       = azurerm_kubernetes_cluster.main.kube_config_raw
-  sensitive   = true
-}

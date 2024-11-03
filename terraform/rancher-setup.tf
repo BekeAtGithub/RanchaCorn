@@ -39,8 +39,3 @@ EOF
   depends_on = [azurerm_kubernetes_cluster.aks]
 }
 
-# Output the Rancher hostname
-output "rancher_hostname" {
-  description = "The hostname for accessing the Rancher UI"
-  value       = var.rancher_hostname
-}

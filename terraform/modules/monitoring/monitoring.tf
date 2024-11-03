@@ -58,14 +58,5 @@ EOF
   depends_on = [azurerm_kubernetes_cluster.main]
 }
 
-# Output the LoadBalancer IP for Grafana
-output "grafana_load_balancer_ip" {
-  description = "The LoadBalancer IP address for accessing Grafana"
-  value       = helm_release.grafana.status[0].load_balancer.ingress[0].ip
-}
 
-# Output the LoadBalancer IP for Prometheus
-output "prometheus_load_balancer_ip" {
-  description = "The LoadBalancer IP address for accessing Prometheus"
-  value       = helm_release.prometheus.status[0].load_balancer.ingress[0].ip
-}
+

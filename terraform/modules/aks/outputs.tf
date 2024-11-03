@@ -34,3 +34,9 @@ output "aks_api_server_fqdn" {
   description = "The fully qualified domain name of the AKS API server"
   value       = azurerm_kubernetes_cluster.main.fqdn
 }
+
+output "kube_config" {
+  description = "The kubeconfig for the AKS cluster"
+  value       = azurerm_kubernetes_cluster.main.kube_config_raw
+  sensitive   = true
+}

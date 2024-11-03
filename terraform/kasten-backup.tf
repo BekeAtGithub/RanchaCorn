@@ -38,8 +38,3 @@ EOF
   depends_on = [azurerm_kubernetes_cluster.aks]
 }
 
-# Output the Kasten K10 hostname
-output "kasten_hostname" {
-  description = "The hostname for accessing the Kasten K10 dashboard"
-  value       = var.kasten_hostname
-}
