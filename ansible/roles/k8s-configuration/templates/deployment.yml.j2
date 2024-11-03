@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ app_name }}
+  namespace: {{ namespace }}
+spec:
+  replicas: {{ replicas }}
+  selector:
+    matchLabels:
+      app: {{ app_name }}
+  template:
+    metadata:
+      labels:
+        app: {{ app_name }}
+    spec:
+      containers:
+      - name: {{ app_name }}
+        image: {{ image }}
+        ports:
+        - containerPort: {{ container_port }}
+        env:
+        {% for env_var in env_vars %}
+        - name: {{ env_var.name }}
+          value: "{{ env_var.value }}"
+        {% endfor %}

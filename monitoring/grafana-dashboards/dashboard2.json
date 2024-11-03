@@ -1,0 +1,109 @@
+{
+    "id": null,
+    "uid": "network-disk-dashboard",
+    "title": "Network and Disk Monitoring",
+    "tags": ["kubernetes", "network", "disk"],
+    "timezone": "browser",
+    "schemaVersion": 30,
+    "version": 1,
+    "refresh": "10s",
+    "panels": [
+      {
+        "type": "graph",
+        "title": "Network Ingress",
+        "datasource": "Prometheus",
+        "targets": [
+          {
+            "expr": "sum(rate(container_network_receive_bytes_total[5m])) by (namespace)",
+            "legendFormat": "{{ namespace }}",
+            "refId": "A"
+          }
+        ],
+        "xaxis": {
+          "mode": "time"
+        },
+        "yaxis": {
+          "format": "bytes",
+          "label": "Bytes per Second",
+          "min": 0
+        }
+      },
+      {
+        "type": "graph",
+        "title": "Network Egress",
+        "datasource": "Prometheus",
+        "targets": [
+          {
+            "expr": "sum(rate(container_network_transmit_bytes_total[5m])) by (namespace)",
+            "legendFormat": "{{ namespace }}",
+            "refId": "B"
+          }
+        ],
+        "xaxis": {
+          "mode": "time"
+        },
+        "yaxis": {
+          "format": "bytes",
+          "label": "Bytes per Second",
+          "min": 0
+        }
+      },
+      {
+        "type": "graph",
+        "title": "Disk Read I/O",
+        "datasource": "Prometheus",
+        "targets": [
+          {
+            "expr": "sum(rate(container_fs_reads_bytes_total[5m])) by (namespace)",
+            "legendFormat": "{{ namespace }}",
+            "refId": "C"
+          }
+        ],
+        "xaxis": {
+          "mode": "time"
+        },
+        "yaxis": {
+          "format": "bytes",
+          "label": "Bytes per Second",
+          "min": 0
+        }
+      },
+      {
+        "type": "graph",
+        "title": "Disk Write I/O",
+        "datasource": "Prometheus",
+        "targets": [
+          {
+            "expr": "sum(rate(container_fs_writes_bytes_total[5m])) by (namespace)",
+            "legendFormat": "{{ namespace }}",
+            "refId": "D"
+          }
+        ],
+        "xaxis": {
+          "mode": "time"
+        },
+        "yaxis": {
+          "format": "bytes",
+          "label": "Bytes per Second",
+          "min": 0
+        }
+      }
+    ],
+    "templating": {
+      "list": []
+    },
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": "-- Grafana --",
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "type": "dashboard"
+        }
+      ]
+    }
+  }
+  

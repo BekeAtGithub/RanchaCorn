@@ -1,0 +1,24 @@
+# FastAPI Application Configuration
+
+# Application settings
+app:
+  name: "{{ app_name }}"
+  version: "{{ app_version }}"
+  environment: "{{ environment }}"
+
+# Host and port settings
+server:
+  host: "{{ server_host }}"
+  port: "{{ server_port }}"
+
+# Database configuration
+database:
+  host: "{{ db_host }}"
+  port: "{{ db_port }}"
+  name: "{{ db_name }}"
+  user: "{{ db_user }}"
+  password: "{{ db_password }}"
+
+# Additional settings
+logging:
+  level: "{{ log_level }}"

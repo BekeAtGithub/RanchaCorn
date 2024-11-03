@@ -1,0 +1,53 @@
+# Ignore Python bytecode files
+__pycache__/
+*.py[cod]
+
+# Ignore virtual environment directories
+venv/
+env/
+.venv/
+
+# Ignore build directories and artifacts
+build/
+dist/
+*.egg-info/
+
+# Ignore Packer artifacts
+*.box
+packer/*.json
+
+# Ignore Terraform state files and backups
+*.tfstate
+*.tfstate.*
+*.tfplan
+/terraform/.terraform/
+terraform.tfvars
+*.tfvars
+
+# Ignore Ansible vault files
+*.vault
+
+# Ignore Kubernetes manifests that might contain sensitive information
+*.yml
+*.yaml
+
+# Ignore Helm chart package files
+*.tgz
+
+# Ignore logs and temporary files
+*.log
+*.tmp
+*.swp
+
+# Ignore Docker-related files
+**/Dockerfile
+**/docker-compose.yml
+**/docker-compose.override.yml
+
+# Ignore IDE/editor specific files
+.vscode/
+.idea/
+*.iml
+
+# Ignore other configuration files
+*.env

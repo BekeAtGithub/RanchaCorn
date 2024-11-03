@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: k10-custom-config
+  namespace: kasten-io
+data:
+  # Example configuration data
+  log-level: "{{ log_level }}"
+  external-gateway:
+    enabled: "{{ external_gateway_enabled }}"

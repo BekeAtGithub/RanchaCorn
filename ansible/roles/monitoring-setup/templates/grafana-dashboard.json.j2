@@ -1,0 +1,17 @@
+{
+  "dashboard": {
+    "title": "{{ dashboard_title }}",
+    "panels": [
+      {
+        "type": "graph",
+        "title": "CPU Usage",
+        "targets": [
+          {
+            "expr": "sum(rate(container_cpu_usage_seconds_total[5m]))",
+            "legendFormat": "CPU"
+          }
+        ]
+      }
+    ]
+  }
+}
