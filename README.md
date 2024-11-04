@@ -114,9 +114,7 @@
 └── ansible.cfg                     # Ansible configuration file
 ```
 
-Here’s a sample `README.md` for your project. This file provides an overview of your FastAPI application deployed on Azure Kubernetes Service (AKS), including setup instructions, usage, and other relevant details.
-
-```markdown
+```
 # FastAPI Application on AKS
 
 This repository contains a FastAPI application deployed on Azure Kubernetes Service (AKS). It includes configurations for infrastructure provisioning using Terraform, application deployment with Ansible, and monitoring with Prometheus and Grafana.
@@ -151,7 +149,7 @@ This repository contains a FastAPI application deployed on Azure Kubernetes Serv
 2. **Configure Azure resources**:
    - Update the Terraform configuration files in the `/terraform` directory with your Azure credentials and desired resource configurations.
    - Run the following command to initialize and apply the Terraform configuration:
-     ```bash
+     ```
      cd terraform
      terraform init
      terraform apply
@@ -159,29 +157,29 @@ This repository contains a FastAPI application deployed on Azure Kubernetes Serv
 
 3. **Deploy the FastAPI application**:
    - Set up your AKS credentials:
-     ```bash
+     ```
      az aks get-credentials --resource-group your-resource-group --name your-aks-cluster
      ```
    - Use Ansible to deploy the application:
-     ```bash
+     ```
      cd ansible
      ansible-playbook playbook.yml
      ```
 
 4. **Install Prometheus and Grafana for monitoring**:
    - Use the provided scripts in the `/scripts` directory to set up monitoring:
-     ```bash
+     ```
      ./scripts/setup-monitoring.sh
      ```
 
 ## Usage
 
 - Access the FastAPI application using the LoadBalancer IP assigned by the Kubernetes Service:
-  ```bash
+  ```
   http://<LOAD_BALANCER_IP>
   ```
 - Access the Grafana dashboard using the LoadBalancer IP assigned to the Grafana Service:
-  ```bash
+  ```
   http://<GRAFANA_LOAD_BALANCER_IP>
   ```
 
