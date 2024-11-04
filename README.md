@@ -1,7 +1,7 @@
 ***###*** WELCOME ***###***
 # EACH DIRECTORY HAS ITS OWN SEPARATE README FOR MORE SPECIFIC INFO ON EACH COMPONENT
 ```
-/project-root
+/ranchacorn
 │
 ├── /app
 │   ├── app.py                      # Your FastAPI app
