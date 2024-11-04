@@ -114,7 +114,7 @@
 └── ansible.cfg                     # Ansible configuration file
 ```
 
-```
+
 # FastAPI Application on AKS
 
 This repository contains a FastAPI application deployed on Azure Kubernetes Service (AKS). It includes configurations for infrastructure provisioning using Terraform, application deployment with Ansible, and monitoring with Prometheus and Grafana.
