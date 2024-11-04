@@ -202,23 +202,9 @@ This repository contains a FastAPI application deployed on Azure Kubernetes Serv
 ## License
 
 This project is licensed under the MIT License. See the LICENSE file for details.
-  
-```
-
-- **Project Title and Overview**: Briefly describes the project and its purpose.
-- **Table of Contents**: Provides a navigational structure for the README.
-- **Prerequisites**: Lists the necessary tools and configurations required to run the project.
-- **Installation**: Step-by-step instructions for setting up Azure resources, deploying the application, and installing monitoring tools.
-- **Usage**: Instructions on how to access the deployed application and Grafana dashboard.
-- **Configuration**: Guidelines for modifying application and Helm chart configurations.
-- **Monitoring**: Overview of monitoring setup using Prometheus and Grafana.
-- **Backup**: Information about the backup solution using Veeam Kasten K10.
-- **License**: Indicates the project's licensing.
 
 ### Customization:
 - Replace placeholders like `your-username`, `your-repo`, `your-resource-group`, and `your-aks-cluster` with actual values relevant to your setup.
 - Modify sections as needed to fit your project's specific requirements and additional features.
-
-Let me know if you need further modifications or additional sections in the README!
 
 
