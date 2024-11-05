@@ -82,7 +82,7 @@
 │   ├── rancher-config.yml          # Rancher configuration file
 │   ├── cluster-setup.sh            # Script to set up Rancher and AKS
 │
-├── /k8s
+├── /k8s #work in progress
 │   ├── deployment.yml              # Kubernetes Deployment manifest
 │   ├── service.yml                 # Kubernetes Service manifest
 │   ├── ingress.yml                 # Kubernetes Ingress manifest
@@ -102,7 +102,7 @@
 │   ├── app-config.yml              # ArgoCD application configuration
 │   ├── project-config.yml          # ArgoCD project configuration
 │
-├── /monitoring
+├── /monitoring # work in progress
 │   ├── prometheus-config.yml       # Prometheus custom configuration
 │   ├── grafana-dashboards/         # Directory for Grafana dashboards
 │       ├── dashboard1.json         # Sample Grafana dashboard JSON
