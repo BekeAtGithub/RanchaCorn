@@ -2,7 +2,7 @@ ansible/playbook.yml
 Set up Kubernetes configuration: Uses the az aks get-credentials command to configure kubectl to connect to your AKS cluster. It requires Azure credentials.
 Deploy the FastAPI application: Applies the Kubernetes manifests for the deployment, service, and ingress using kubectl.
 Verify the deployment status: Checks the rollout status of the fastapi-deployment to ensure everything is deployed correctly.
-debug: Outputs a message indicating the successful deployment status.
+debug: Outputs a message indicating the successful deployment status. 
 variables;
 resource_group_name: The name of the Azure resource group where the AKS cluster is located.
 aks_cluster_name: The name of the AKS cluster.
