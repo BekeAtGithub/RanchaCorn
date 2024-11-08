@@ -1,0 +1,27 @@
+---
+- name: Deploy FastAPI app to AKS
+  hosts: localhost
+  tasks:
+    - name: Set up Kubernetes configuration
+      shell: |
+        az aks get-credentials --resource-group {{ resource_group_name }} --name {{ aks_cluster_name }}
+      environment:
+        AZURE_CLIENT_ID: "{{ azure_client_id }}"
+        AZURE_SECRET: "{{ azure_secret }}"
+        AZURE_TENANT: "{{ azure_tenant }}"
+      register: kubectl_config
+      ignore_errors: yes
+
+    - name: Deploy the FastAPI application using Kubernetes manifests
+      command: kubectl apply -f {{ item }}
+      with_items:
+        - "{{ playbook_dir }}/../k8s/deployment.yml"
+        - "{{ playbook_dir }}/../k8s/service.yml"
+        - "{{ playbook_dir }}/../k8s/ingress.yml"
+
+    - name: Verify the deployment status
+      shell: kubectl rollout status deployment fastapi-deployment
+      register: rollout_status
+
+    - debug:
+        msg: "Deployment completed successfully: {{ rollout_status.stdout }}"

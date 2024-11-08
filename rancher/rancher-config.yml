@@ -1,0 +1,17 @@
+apiVersion: rancher.cattle.io/v3
+kind: Cluster
+metadata:
+  name: aks-cluster
+  namespace: fleet-default
+spec:
+  displayName: "AKS Cluster"
+  aksConfig:
+    resourceGroup: "my-azure-resource-group"
+    region: "East US"  # Specify the region where your AKS cluster is located
+    nodeCount: 3       # Number of nodes in the default node pool
+    nodeVmSize: "Standard_DS2_v2"  # VM size for the AKS nodes
+    kubernetesVersion: "1.25.4"    # Specify the Kubernetes version
+    networkPlugin: "azure"         # Network plugin for AKS
+    networkPolicy: "azure"         # Network policy for AKS
+  cloudCredentialSecretName: "azure-credentials"  # Name of the secret for Azure credentials
+  defaultPodSecurityPolicyTemplateName: "restricted"  # Pod security policy

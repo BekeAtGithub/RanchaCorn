@@ -20,7 +20,7 @@ variable "resource_group_name" {
 variable "address_space" {
   description = "The address space for the virtual network"
   type        = list(string)
-  default     = ["10.0.0.0/16"]  # You can customize this address space
+  default     = ["10.0.0.0/16"] # You can customize this address space
 }
 
 # Variable for the subnet name
@@ -33,14 +33,14 @@ variable "subnet_name" {
 variable "subnet_prefixes" {
   description = "The address prefixes for the subnet"
   type        = list(string)
-  default     = ["10.0.1.0/24"]  # You can customize this subnet prefix
+  default     = ["10.0.1.0/24"] # You can customize this subnet prefix
 }
 
 # Variable for tags
 variable "tags" {
   description = "A map of tags to add to the networking resources"
   type        = map(string)
-  default     = {
+  default = {
     Environment = "Development"
     Project     = "MyProject"
   }

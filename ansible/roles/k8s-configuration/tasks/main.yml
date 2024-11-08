@@ -1,0 +1,25 @@
+---
+- name: Set up Kubernetes namespace
+  command: kubectl create namespace {{ namespace }}
+  ignore_errors: yes
+
+- name: Apply Kubernetes deployment configuration
+  command: kubectl apply -f {{ item }}
+  with_items:
+    - "{{ role_path }}/../../k8s/deployment.yml"
+    - "{{ role_path }}/../../k8s/service.yml"
+    - "{{ role_path }}/../../k8s/ingress.yml"
+
+- name: Wait for the deployment to complete
+  shell: kubectl rollout status deployment {{ deployment_name }} -n {{ namespace }}
+  register: rollout_status
+  retries: 5
+  delay: 10
+  until: rollout_status.rc == 0
+
+- name: Verify service is running
+  shell: kubectl get services -n {{ namespace }}
+  register: service_status
+
+- debug:
+    msg: "Service status: {{ service_status.stdout_lines }}"

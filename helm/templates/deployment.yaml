@@ -1,0 +1,45 @@
+# Default values for my-fastapi-app
+
+replicaCount: 3  # Number of replicas for the FastAPI deployment
+
+image:
+  repository: my-fastapi-app  # Replace with your Docker image name
+  tag: latest                 # Replace with the desired image tag
+  pullPolicy: IfNotPresent
+
+service:
+  type: LoadBalancer          # Service type (LoadBalancer for external access)
+  port: 80                    # External port
+  targetPort: 8000            # Port on the container
+
+resources:
+  requests:
+    memory: "256Mi"
+    cpu: "250m"
+  limits:
+    memory: "512Mi"
+    cpu: "500m"
+
+ingress:
+  enabled: true               # Enable or disable Ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  hosts:
+    - host: myapp.example.com # Replace with your domain name
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls:
+    - secretName: myapp-tls   # Name of the TLS secret
+      hosts:
+        - myapp.example.com   # Replace with your domain name
+
+autoscaling:
+  enabled: false              # Enable or disable autoscaling
+  minReplicas: 1
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 80
+
+nodeSelector: {}              # Node selector for scheduling pods
+tolerations: []               # Tolerations for scheduling pods
+affinity: {}                  # Affinity rules for scheduling pods

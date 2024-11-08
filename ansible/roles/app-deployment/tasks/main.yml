@@ -1,0 +1,29 @@
+---
+- name: Configure Kubernetes access
+  shell: |
+    az aks get-credentials --resource-group {{ resource_group_name }} --name {{ aks_cluster_name }} --overwrite-existing
+  environment:
+    AZURE_CLIENT_ID: "{{ azure_client_id }}"
+    AZURE_SECRET: "{{ azure_secret }}"
+    AZURE_TENANT: "{{ azure_tenant }}"
+  register: kubectl_config
+  ignore_errors: no
+
+- name: Deploy the FastAPI app to AKS
+  command: kubectl apply -f {{ item }}
+  with_items:
+    - "{{ role_path }}/../../k8s/deployment.yml"
+    - "{{ role_path }}/../../k8s/service.yml"
+    - "{{ role_path }}/../../k8s/ingress.yml"
+  register: deployment_output
+
+- name: Wait for the deployment to complete
+  shell: kubectl rollout status deployment fastapi-deployment -n default
+  register: rollout_status
+  retries: 5
+  delay: 10
+  until: rollout_status.rc == 0
+
+- name: Display deployment output
+  debug:
+    msg: "{{ deployment_output.stdout_lines }}"

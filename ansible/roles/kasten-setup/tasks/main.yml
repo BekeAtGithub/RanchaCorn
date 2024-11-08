@@ -1,0 +1,32 @@
+---
+- name: Create Kubernetes namespace for Kasten K10
+  command: kubectl create namespace kasten-io
+  ignore_errors: yes
+
+- name: Add Kasten Helm repository
+  command: helm repo add kasten https://charts.kasten.io/
+  register: helm_repo_add
+
+- name: Update Helm repositories
+  command: helm repo update
+  when: helm_repo_add is changed
+
+- name: Deploy Kasten K10 using Helm
+  command: >
+    helm install k10 kasten/k10
+    --namespace kasten-io
+    --set global.persistence.storageClass={{ storage_class }}
+    --set auth.tokenAuth.enabled=true
+    --set externalGateway.create=true
+  register: kasten_install
+
+- name: Wait for Kasten K10 deployment to be ready
+  shell: kubectl rollout status deployment k10 -n kasten-io
+  register: rollout_status
+  retries: 10
+  delay: 15
+  until: rollout_status.rc == 0
+
+- name: Display Kasten installation status
+  debug:
+    msg: "Kasten K10 installation completed: {{ kasten_install.stdout_lines }}"

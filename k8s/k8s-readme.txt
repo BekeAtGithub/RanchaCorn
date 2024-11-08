@@ -1,3 +1,5 @@
+add all these ymls to .gitignore file if you store any sensitive data
+
 deployment.yml
 apiVersion: Specifies the API version for the Deployment resource (apps/v1).
 kind: Indicates that this is a Deployment resource.

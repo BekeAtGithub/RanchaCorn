@@ -1,0 +1,57 @@
+---
+- name: Create Kubernetes namespace for monitoring
+  command: kubectl create namespace monitoring
+  ignore_errors: yes
+
+- name: Add Prometheus Helm repository
+  command: helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+  register: prometheus_repo_add
+
+- name: Add Grafana Helm repository
+  command: helm repo add grafana https://grafana.github.io/helm-charts
+  register: grafana_repo_add
+
+- name: Update Helm repositories
+  command: helm repo update
+  when: prometheus_repo_add is changed or grafana_repo_add is changed
+
+- name: Deploy Prometheus using Helm
+  command: >
+    helm install prometheus prometheus-community/prometheus
+    --namespace monitoring
+    --set server.service.type=LoadBalancer
+  register: prometheus_install
+
+- name: Deploy Grafana using Helm
+  command: >
+    helm install grafana grafana/grafana
+    --namespace monitoring
+    --set adminUser={{ grafana_admin_user }}
+    --set adminPassword={{ grafana_admin_password }}
+    --set service.type=LoadBalancer
+    --set persistence.enabled=true
+    --set persistence.storageClassName={{ storage_class }}
+    --set persistence.size=10Gi
+  register: grafana_install
+
+- name: Wait for Prometheus deployment to be ready
+  shell: kubectl rollout status deployment prometheus-server -n monitoring
+  register: prometheus_rollout_status
+  retries: 5
+  delay: 15
+  until: prometheus_rollout_status.rc == 0
+
+- name: Wait for Grafana deployment to be ready
+  shell: kubectl rollout status deployment grafana -n monitoring
+  register: grafana_rollout_status
+  retries: 5
+  delay: 15
+  until: grafana_rollout_status.rc == 0
+
+- name: Display Prometheus installation status
+  debug:
+    msg: "Prometheus installation completed: {{ prometheus_install.stdout_lines }}"
+
+- name: Display Grafana installation status
+  debug:
+    msg: "Grafana installation completed: {{ grafana_install.stdout_lines }}"

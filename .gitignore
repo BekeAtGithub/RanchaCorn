@@ -28,8 +28,8 @@ terraform.tfvars
 *.vault
 
 # Ignore Kubernetes manifests that might contain sensitive information
-*.yml
-*.yaml
+#*.yml
+#*.yaml
 
 # Ignore Helm chart package files
 *.tgz

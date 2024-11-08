@@ -2,7 +2,7 @@
 variable "kasten_version" {
   description = "The version of Kasten K10 to deploy using the Helm chart"
   type        = string
-  default     = "5.0.0"  # Update this to the desired Kasten version
+  default     = "5.0.0" # Update this to the desired Kasten version
 }
 
 # Variable for the hostname to access the Kasten K10 dashboard
@@ -15,14 +15,14 @@ variable "kasten_hostname" {
 variable "storage_class" {
   description = "The storage class for persistent volumes used by Kasten K10"
   type        = string
-  default     = "default"  # Update this to the appropriate storage class in your AKS cluster
+  default     = "default" # Update this to the appropriate storage class in your AKS cluster
 }
 
 # Variable for tags
 variable "tags" {
   description = "A map of tags to add to the Kasten K10 resources"
   type        = map(string)
-  default     = {
+  default = {
     Environment = "Development"
     Project     = "MyProject"
   }

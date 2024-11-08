@@ -1,0 +1,13 @@
+---
+# Handler to restart the FastAPI application
+- name: Restart FastAPI app
+  command: kubectl rollout restart deployment fastapi-deployment
+  notify: Check FastAPI app status
+
+# Handler to check the status of the FastAPI app after a restart
+- name: Check FastAPI app status
+  shell: kubectl rollout status deployment fastapi-deployment
+  register: rollout_status
+  retries: 5
+  delay: 10
+  until: rollout_status.rc == 0

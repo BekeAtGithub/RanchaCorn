@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fastapi-deployment
+  namespace: default
+  labels:
+    app: fastapi-app
+spec:
+  replicas: 3  # Number of pod replicas
+  selector:
+    matchLabels:
+      app: fastapi-app
+  template:
+    metadata:
+      labels:
+        app: fastapi-app
+    spec:
+      containers:
+        - name: fastapi-container
+          image: my-fastapi-app:latest  # Replace with your Docker image
+          ports:
+            - containerPort: 8000  # The port your FastAPI app listens on
+          env:
+            - name: APP_ENV
+              value: "production"  # Example environment variable
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "500m"
+            limits:
+              memory: "256Mi"
+              cpu: "1"
+      restartPolicy: Always

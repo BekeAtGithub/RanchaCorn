@@ -22,30 +22,14 @@ output "rancher_hostname" {
   value       = var.rancher_hostname
 }
 
-# Output the LoadBalancer IP for Grafana
 output "grafana_load_balancer_ip" {
-  description = "The LoadBalancer IP address for accessing Grafana"
-  value       = helm_release.grafana.status[0].load_balancer.ingress[0].ip
+  value = length(helm_release.grafana.status) > 0 && length(helm_release.grafana.status[0].load_balancer.ingress) > 0 ? helm_release.grafana.status[0].load_balancer.ingress[0].ip : null
 }
 
-# Output the LoadBalancer IP for Prometheus
 output "prometheus_load_balancer_ip" {
-  description = "The LoadBalancer IP address for accessing Prometheus"
-  value       = helm_release.prometheus.status[0].load_balancer.ingress[0].ip
+  value = length(helm_release.prometheus.status) > 0 && length(helm_release.prometheus.status[0].load_balancer.ingress) > 0 ? helm_release.prometheus.status[0].load_balancer.ingress[0].ip : null
 }
 
-# Output the resource group and virtual network details
-output "resource_group_name" {
-  value = azurerm_resource_group.main.name
-}
-
-output "virtual_network_name" {
-  value = azurerm_virtual_network.main.name
-}
-
-output "subnet_name" {
-  value = azurerm_subnet.main.name
-}
 
 # Output the Kasten K10 hostname
 output "kasten_hostname" {

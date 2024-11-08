@@ -16,10 +16,10 @@ resource "azurerm_kubernetes_cluster" "aks" {
   }
 
   network_profile {
-    network_plugin    = "azure"
-    network_policy    = "azure"
-    dns_service_ip    = "10.0.0.10"
-    service_cidr      = "10.0.0.0/16"
+    network_plugin = "azure"
+    network_policy = "azure"
+    dns_service_ip = "10.0.0.10"
+    service_cidr   = "10.0.0.0/16"
   }
 
   tags = {
@@ -27,3 +27,14 @@ resource "azurerm_kubernetes_cluster" "aks" {
   }
 }
 
+resource "kubernetes_namespace" "grafana" {
+  metadata {
+    name = "grafana"
+  }
+}
+
+resource "kubernetes_namespace" "prometheus" {
+  metadata {
+    name = "prometheus"
+  }
+}

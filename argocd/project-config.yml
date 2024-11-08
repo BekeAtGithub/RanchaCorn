@@ -1,0 +1,43 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: fastapi-project
+  namespace: argocd
+  labels:
+    project: fastapi-project
+spec:
+  description: "Project for managing FastAPI applications in ArgoCD"
+
+  # List of source repositories allowed for applications in this project
+  sourceRepos:
+    - "https://github.com/your-username/your-repo.git"  # Replace with your repository URL
+
+  # List of destination clusters and namespaces allowed for applications in this project
+  destinations:
+    - namespace: default
+      server: https://kubernetes.default.svc
+
+  # Optional: Define which clusters can be accessed
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+
+  # Optional: Specify which namespaces can be accessed
+  namespaceResourceBlacklist:
+    - group: ''
+      kind: ResourceQuota
+
+  # Synchronization options
+  syncWindows: []  # Define sync windows if needed for limiting deployment times
+
+  # Roles and permissions
+  roles:
+    - name: developer
+      description: "Role for developers with limited permissions"
+      policies:
+        - "p, proj:fastapi-project:developer, applications, get, fastapi-app/*, allow"
+        - "p, proj:fastapi-project:developer, applications, sync, fastapi-app/*, allow"
+      groups: []
+
+  # Signature keys for verifying signed commits
+  signatureKeys: []

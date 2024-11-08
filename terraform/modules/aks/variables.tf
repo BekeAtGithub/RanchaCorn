@@ -26,14 +26,14 @@ variable "dns_prefix" {
 variable "node_count" {
   description = "The number of nodes in the default node pool"
   type        = number
-  default     = 3  # You can adjust this value as needed
+  default     = 3 # You can adjust this value as needed
 }
 
 # Variable for the VM size of the nodes in the default node pool
 variable "node_vm_size" {
   description = "The VM size for the AKS nodes"
   type        = string
-  default     = "Standard_DS2_v2"  # You can customize this based on your needs
+  default     = "Standard_DS2_v2" # You can customize this based on your needs
 }
 
 # Variable for the subnet ID
@@ -52,7 +52,7 @@ variable "log_analytics_workspace_id" {
 variable "tags" {
   description = "A map of tags to add to the AKS resources"
   type        = map(string)
-  default     = {
+  default = {
     Environment = "Development"
     Project     = "MyProject"
   }

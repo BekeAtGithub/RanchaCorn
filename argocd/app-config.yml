@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: fastapi-app
+  namespace: argocd
+  labels:
+    app.kubernetes.io/name: fastapi-app
+spec:
+  project: default
+
+  source:
+    repoURL: "https://github.com/your-username/your-repo.git"  # Replace with your repository URL
+    targetRevision: main                                       # Branch to track (e.g., main or master)
+    path: helm                                                 # Path to the Helm chart within the repository
+
+  destination:
+    server: https://kubernetes.default.svc                     # Points to the Kubernetes API of your cluster
+    namespace: default                                         # Namespace to deploy the application
+
+  syncPolicy:
+    automated:
+      prune: true                                              # Automatically delete resources that are no longer defined in Git
+      selfHeal: true                                           # Automatically apply changes if a resource is modified manually
+    retry:
+      limit: 5                                                 # Number of retry attempts if syncing fails
+      backoff:
+        duration: "5s"                                         # Wait duration between retries
+        factor: 2                                              # Factor to multiply the wait duration after each failed attempt
+        maxDuration: "3m"                                      # Maximum wait duration

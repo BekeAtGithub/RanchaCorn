@@ -1,0 +1,29 @@
+apiVersion: k10.kasten.io/v1alpha1
+kind: Profile
+metadata:
+  name: azure-backup-profile
+  namespace: kasten-io
+spec:
+  type: ObjectStore
+  objectStore:
+    name: mybackupcontainer         # Replace with your Azure Blob container name
+    objectStoreType: azure
+    region: eastus                  # Replace with your Azure region
+    endpoint: blob.core.windows.net
+    credentials:
+      accountName: my-storage-account   # Replace with your Azure storage account name
+      accountKey: my-storage-key        # Replace with your Azure storage account key
+---
+apiVersion: k10.kasten.io/v1alpha1
+kind: Policy
+metadata:
+  name: daily-backup-policy
+  namespace: kasten-io
+spec:
+  frequency: "@daily"                   # Cron expression for backup frequency
+  actions:
+    - action: backup
+      profile: azure-backup-profile     # Reference to the backup profile created above
+      selectors:
+        matchTags:
+          app: fastapi-app              # Tag or label selector for resources to back up

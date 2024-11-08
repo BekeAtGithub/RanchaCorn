@@ -2,7 +2,7 @@
 variable "rancher_version" {
   description = "The version of Rancher to deploy using the Helm chart"
   type        = string
-  default     = "2.7.0"  # Update this to the desired Rancher version
+  default     = "2.7.0" # Update this to the desired Rancher version
 }
 
 # Variable for the hostname to access the Rancher UI
@@ -21,7 +21,7 @@ variable "letsencrypt_email" {
 variable "tags" {
   description = "A map of tags to add to the Rancher resources"
   type        = map(string)
-  default     = {
+  default = {
     Environment = "Development"
     Project     = "MyProject"
   }
