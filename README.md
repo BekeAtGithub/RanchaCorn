@@ -82,7 +82,7 @@
 │   ├── rancher-config.yml          # Rancher configuration file
 │   ├── cluster-setup.sh            # Script to set up Rancher and AKS
 │
-├── /k8s #work in progress
+├── /k8s 
 │   ├── deployment.yml              # Kubernetes Deployment manifest
 │   ├── service.yml                 # Kubernetes Service manifest
 │   ├── ingress.yml                 # Kubernetes Ingress manifest
