@@ -146,7 +146,7 @@ This repository contains a FastAPI application deployed on Azure Kubernetes Serv
    cd your-repo
    ```
 
-2. **Configure Azure resources**:
+2. **Configure Azure resources**: 
    - Update the Terraform configuration files in the `/terraform` directory with your Azure credentials and desired resource configurations.
    - Run the following command to initialize and apply the Terraform configuration:
      ```
